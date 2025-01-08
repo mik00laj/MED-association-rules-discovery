@@ -20,6 +20,7 @@ class Eclat:
         for tid, transaction in enumerate(transactions):
             for item in transaction:
                 tid_sets[frozenset([item])].add(tid)
+
         return tid_sets
 
     def _eclat_recursive(self, prefix: frozenset, items: List[Tuple[frozenset, Set[int]]], freq_sets: List[Item]):

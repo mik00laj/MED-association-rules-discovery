@@ -61,9 +61,13 @@ def main(
     """
 
     data_manager = DataManager()
-    data_x, data_y = data_manager.fetch_data_from_UCI(uci_dataset)
-    input_data = DataManager.combine_data(data_x, data_y)
-    algo_input, metrics_input = tee(input_data)
+    if input_file:
+        input_data = data_manager.get_data_from_file(input_file)
+        algo_input, metrics_input = tee(input_data)
+    else:
+        data_x, data_y = data_manager.fetch_data_from_UCI(uci_dataset)
+        input_data = DataManager.combine_data(data_x, data_y)
+        algo_input, metrics_input = tee(input_data)
 
     if algorithm == "apriori":
         model = Apriori(min_support, min_confidence)
